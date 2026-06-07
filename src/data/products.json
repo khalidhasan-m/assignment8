@@ -1,0 +1,90 @@
+[
+  {
+    "id": 1,
+    "name": "UV Protection Sunglasses",
+    "brand": "SunShade",
+    "price": 25,
+    "rating": 4.7,
+    "stock": 15,
+    "category": "Accessories",
+    "description": "Stylish UV400 protection sunglasses perfect for summer outings. Lightweight frame with polarized lenses that reduce glare and protect your eyes from harmful UV rays. Available in multiple colors.",
+    "image": "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=500&auto=format"
+  },
+  {
+    "id": 2,
+    "name": "SPF 50 Sunscreen Lotion",
+    "brand": "GlowGuard",
+    "price": 18,
+    "rating": 4.8,
+    "stock": 30,
+    "category": "Skincare",
+    "description": "Dermatologist-tested SPF 50 sunscreen lotion that protects your skin from UVA and UVB rays. Water-resistant formula lasts up to 8 hours. Lightweight, non-greasy, and suitable for all skin types.",
+    "image": "https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=500&auto=format"
+  },
+  {
+    "id": 3,
+    "name": "Tropical Beach Shirt",
+    "brand": "WaveWear",
+    "price": 35,
+    "rating": 4.5,
+    "stock": 20,
+    "category": "Clothing",
+    "description": "Breezy tropical print beach shirt made from 100% breathable cotton. Perfect for beach days, vacations, and summer parties. Machine washable and available in sizes S to XXL.",
+    "image": "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=500&auto=format"
+  },
+  {
+    "id": 4,
+    "name": "Waterproof Beach Bag",
+    "brand": "CoastalCo",
+    "price": 42,
+    "rating": 4.6,
+    "stock": 12,
+    "category": "Accessories",
+    "description": "Spacious waterproof beach bag with multiple compartments. Fits towels, sunscreen, snacks, and more. Made from durable, sand-resistant material with a comfortable shoulder strap. Perfect for a full beach day.",
+    "image": "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=500&auto=format"
+  },
+  {
+    "id": 5,
+    "name": "Aloe Vera After-Sun Gel",
+    "brand": "GlowGuard",
+    "price": 14,
+    "rating": 4.9,
+    "stock": 25,
+    "category": "Skincare",
+    "description": "Soothing 99% pure aloe vera gel that calms and cools sun-exposed skin. Helps reduce redness and prevents peeling after a day in the sun. Alcohol-free, fragrance-free, and safe for sensitive skin.",
+    "image": "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=500&auto=format"
+  },
+  {
+    "id": 6,
+    "name": "Foldable Sun Hat",
+    "brand": "SunShade",
+    "price": 22,
+    "rating": 4.4,
+    "stock": 18,
+    "category": "Accessories",
+    "description": "Wide-brim foldable sun hat that provides full face and neck protection. Made from lightweight straw material with a UPF 50+ rating. Packable and travel-friendly — fits easily in any beach bag.",
+    "image": "https://images.unsplash.com/photo-1521369909029-2afed882baee?w=500&auto=format"
+  },
+  {
+    "id": 7,
+    "name": "Inflatable Pool Float",
+    "brand": "AquaFun",
+    "price": 29,
+    "rating": 4.3,
+    "stock": 10,
+    "category": "Beach & Pool",
+    "description": "Giant inflatable pool float in a fun flamingo design. Made from thick, puncture-resistant PVC. Easy to inflate and deflate. Supports up to 200 lbs. Great for pools, lakes, and calm ocean shores.",
+    "image": "https://images.unsplash.com/photo-1530053969600-caed2596d242?w=500&auto=format"
+  },
+  {
+    "id": 8,
+    "name": "Summer Flip Flops",
+    "brand": "WaveWear",
+    "price": 16,
+    "rating": 4.5,
+    "stock": 40,
+    "category": "Footwear",
+    "description": "Comfortable and durable rubber flip flops with arch support and anti-slip soles. Perfect for the beach, pool, or casual summer walks. Available in 6 vibrant summer colors and sizes 5–13.",
+    "image": "https://images.unsplash.com/photo-1603487742131-4160ec999306?w=500&auto=format"
+  }
+]
