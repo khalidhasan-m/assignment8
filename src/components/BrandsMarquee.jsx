@@ -9,14 +9,15 @@ export default function BrandsMarquee() {
     <Marquee pauseOnHover speed={50}>
       {brands.map((brand) => (
         <div key={brand.id} className="mx-8 flex items-center gap-2">
-          <Image
-            src={brand.image}
-            alt={brand.name}
-            width={40}
-            height={40}
-            loading="lazy"
-            className="object-contain"
-          />
+          <div className="w-10 h-10 relative">
+            <Image
+              src={brand.image}
+              alt={brand.name}
+              fill
+              sizes="40px"
+              className="object-contain"
+            />
+          </div>
           <span className="font-medium">{brand.name}</span>
         </div>
       ))}

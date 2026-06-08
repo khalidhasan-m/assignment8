@@ -1,5 +1,6 @@
 "use client";
 
+import { useParams } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
@@ -24,17 +25,16 @@ function StarRating({ rating }) {
 }
 
 export default function ProductDetailsPage() {
+  const params = useParams();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const url = new URL(window.location.href);
-    const productId = parseInt(url.pathname.split("/").pop());
-
+    const productId = parseInt(params.id);
     const foundProduct = products.find((p) => p.id === productId);
     setProduct(foundProduct);
     setLoading(false);
-  }, []);
+  }, [params.id]);
 
   if (loading) {
     return (

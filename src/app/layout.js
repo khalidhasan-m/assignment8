@@ -23,7 +23,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${poppins.className} min-h-screen flex flex-col`}>
+      <body
+        className={`${poppins.className} min-h-screen flex flex-col`}
+        suppressHydrationWarning
+      >
         {children}
 
         <ToastContainer

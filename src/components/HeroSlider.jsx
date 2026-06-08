@@ -26,6 +26,7 @@ export default function HeroSlider() {
               fill
               priority={idx === 0}
               loading={idx === 0 ? "eager" : "lazy"}
+              sizes="100vw"
               className="object-cover"
             />
 

@@ -1,7 +1,7 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
@@ -15,13 +15,24 @@ export default function LoginPage() {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [checking, setChecking] = useState(true);
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      const session = await authClient.getSession();
+      if (session.data?.user) {
+        router.push(redirect);
+      }
+      setChecking(false);
+    };
+    checkAuth();
+  }, [router, redirect]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
     setError("");
   };
 
-  // ── Email/Password Login ──
   const handleLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -39,16 +50,26 @@ export default function LoginPage() {
       return;
     }
 
-    router.push(redirect); // ← redirects back to product page
+    router.push(redirect);
   };
 
-  // ── Google Login ──
   const handleGoogleLogin = async () => {
     await authClient.signIn.social({
       provider: "google",
-      callbackURL: redirect, // ← also works for Google
+      callbackURL: redirect,
     });
   };
+
+  if (checking) {
+    return (
+      <div className="flex-1 flex items-center justify-center">
+        <div className="text-center">
+          <div className="text-5xl mb-4 animate-spin">☀️</div>
+          <p className="text-gray-500 font-medium">Loading...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex-1 flex items-center justify-center px-4 py-12">

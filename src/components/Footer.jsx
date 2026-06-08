@@ -113,11 +113,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={social.label}
-                className="w-9 h-9 flex items-center justify-center rounded-full
-                           bg-white/40 border border-white/30
-                           text-orange-500
-                           hover:bg-orange-500 hover:text-white
-                           transition-all duration-200 backdrop-blur-md"
+                className="w-9 h-9 flex items-center justify-center rounded-full bg-white/40 border border-white/30 text-orange-500 hover:bg-orange-500 hover:text-white transition-all duration-200 backdrop-blur-md"
               >
                 {social.icon}
               </a>
@@ -149,7 +145,10 @@ export default function Footer() {
 
             <span className="text-gray-300">|</span>
 
-            <Link href="/terms" className="hover:text-orange-500 transition">
+            <Link
+              href="/terms-of-service"
+              className="hover:text-orange-500 transition"
+            >
               Terms of Service
             </Link>
           </div>
