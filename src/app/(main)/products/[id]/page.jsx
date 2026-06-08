@@ -1,10 +1,11 @@
 "use client";
 
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import products from "@/data/products.json";
+import { authClient } from "@/lib/auth-client";
 
 function StarRating({ rating }) {
   return (
@@ -26,27 +27,38 @@ function StarRating({ rating }) {
 
 export default function ProductDetailsPage() {
   const params = useParams();
-  const [product, setProduct] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
+  const { data: session, isPending: authPending } = authClient.useSession();
+
+  // ── Auth Guard ──
   useEffect(() => {
-    const productId = parseInt(params.id);
-    const foundProduct = products.find((p) => p.id === productId);
-    setProduct(foundProduct);
-    setLoading(false);
+    if (!authPending && !session) {
+      router.push(`/login?redirect=/products/${params.id}`);
+    }
+  }, [session, authPending, router, params.id]);
+
+  // ── Find Product (static data — no effect needed) ──
+  const product = useMemo(() => {
+    return products.find((p) => p.id === parseInt(params.id)) ?? null;
   }, [params.id]);
 
-  if (loading) {
+  // ── Auth Loading ──
+  if (authPending) {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
         <div className="text-center">
           <div className="text-5xl mb-4 animate-spin">☀️</div>
-          <p className="text-gray-500 font-medium">Loading...</p>
+          <p className="text-gray-500 font-medium">Checking login...</p>
         </div>
       </div>
     );
   }
 
+  // ── Not logged in (redirect in progress) ──
+  if (!session) return null;
+
+  // ── Product Not Found ──
   if (!product) {
     return (
       <main className="max-w-6xl mx-auto px-4 py-12">

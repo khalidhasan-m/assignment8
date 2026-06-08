@@ -11,6 +11,7 @@
   "dependencies": {
     "@heroui/react": "^3.1.0",
     "@heroui/styles": "^3.1.0",
+    "@lottiefiles/dotlottie-react": "^0.19.4",
     "@lottiefiles/dotlottie-web": "^0.74.0",
     "better-auth": "^1.6.10",
     "embla-carousel-autoplay": "^8.6.0",
