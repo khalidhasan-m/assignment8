@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
 import { FcGoogle } from "react-icons/fc";
+import { toast } from "react-toastify";
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -28,7 +29,7 @@ export default function RegisterPage() {
     setLoading(true);
     setError("");
 
-    const { data, error } = await authClient.signUp.email({
+    const { error } = await authClient.signUp.email({
       name: formData.name,
       email: formData.email,
       password: formData.password,
@@ -42,6 +43,10 @@ export default function RegisterPage() {
       return;
     }
 
+    // Sign out so the login page doesn't auto-redirect to home
+    await authClient.signOut();
+
+    toast.success("Registration successful! Please log in.");
     router.push("/login");
   };
 

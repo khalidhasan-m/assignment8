@@ -34,7 +34,7 @@ export default function MyProfilePage() {
   const user = session.user;
 
   return (
-    <main className="max-w-2xl mx-auto px-4 py-12">
+    <main className="max-w-3xl mx-auto px-4 py-12">
 
       {/* Header */}
       <div className="text-center mb-10">

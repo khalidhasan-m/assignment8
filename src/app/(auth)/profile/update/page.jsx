@@ -10,26 +10,27 @@ export default function UpdateProfilePage() {
   const router = useRouter();
   const { data: session, isPending } = authClient.useSession();
 
-  const [formData, setFormData] = useState({ name: "", image: "" });
+  // ── Draft state: null means "not typed yet, use session value" ──
+  const [draft, setDraft] = useState({ name: null, image: null });
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
 
-  // ── Protect Route ──
+  // ── Derived form values (draft overrides session defaults) ──
+  const formData = {
+    name: draft.name ?? session?.user?.name ?? "",
+    image: draft.image ?? session?.user?.image ?? "",
+  };
+
+  // ── Auth Guard (no setState here — router is an external system) ──
   useEffect(() => {
     if (!isPending && !session) {
       router.push("/login");
     }
-    if (session) {
-      setFormData({
-        name: session.user.name ?? "",
-        image: session.user.image ?? "",
-      });
-    }
   }, [session, isPending, router]);
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setDraft((prev) => ({ ...prev, [e.target.name]: e.target.value }));
     setError("");
     setSuccess(false);
   };
