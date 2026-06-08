@@ -17,7 +17,7 @@ export default function HeroSlider() {
         {slides.map((slide, idx) => (
           <div
             key={slide.id}
-            className="min-w-full relative flex items-center justify-center py-20 px-6 overflow-hidden bg-gradient-to-r from-orange-400 to-yellow-300"
+            className="min-w-full relative flex items-center justify-center py-20 px-6 overflow-hidden bg-linear-to-r from-orange-400 to-yellow-300"
           >
             {/* Background Image */}
             <Image
