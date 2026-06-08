@@ -1,36 +1,73 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# SunCart – Summer Essentials Store
 
-## Getting Started
+A modern summer eCommerce platform where users can explore and purchase seasonal products like sunglasses, skincare, beach accessories, summer outfits, and more. Users can browse products, view details, and place orders after authentication.
 
-First, run the development server:
+## 🌐 Live URL
+
+[https://my-live-url.vercel.app](https://my-live-url.vercel.app)
+
+
+## ✨ Key Features
+
+- 🛍️ **Product Browsing** — Browse 8+ summer products with search and category filtering
+- 🔒 **Protected Routes** — Product details page is accessible only to logged-in users
+- 🔐 **Authentication** — Email/password login and Google OAuth via BetterAuth
+- 👤 **User Profile** — View your profile with name, email, and avatar
+- ✏️ **Update Profile** — Update your display name and profile photo URL
+- 🎠 **Hero Slider** — Auto-scrolling banner highlighting summer sales and hot deals
+- 🌿 **Summer Care Tips** — Helpful skincare and hydration tips section
+- 🏷️ **Top Brands Marquee** — Animated brand showcase using react-fast-marquee
+- 📱 **Fully Responsive** — Works on mobile, tablet, and desktop
+- 🎨 **Custom 404 Page** — Animated Lottie 404 error page
+
+## 🛠️ Tech Stack
+
+- **Framework:** Next.js 16 (App Router)
+- **Styling:** Tailwind CSS v4
+- **UI Components:** HeroUI
+- **Authentication:** BetterAuth
+- **Database:** MongoDB (via BetterAuth adapter)
+
+## 📦 NPM Packages Used
+
+| Package | Purpose |
+|---|---|
+| `better-auth` | Authentication (email/password + Google OAuth) |
+| `@heroui/react` | UI component library |
+| `tailwindcss` | Utility-first CSS framework |
+| `@lottiefiles/dotlottie-web` | Lottie animation on 404 page |
+| `framer-motion` | Page and UI animations |
+| `embla-carousel-react` | Hero slider / carousel |
+| `embla-carousel-autoplay` | Auto-play plugin for the slider |
+| `react-fast-marquee` | Animated brand marquee |
+| `react-hook-form` | Form state management |
+| `react-icons` | Icon library |
+| `react-toastify` | Toast notifications |
+| `mongodb` | MongoDB client for BetterAuth |
+| `kysely` | Query builder (BetterAuth dependency) |
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js 18+
+- A MongoDB database (e.g. MongoDB Atlas — free tier)
+- A Google OAuth app (from Google Cloud Console)
+
+### Installation
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+git clone https://github.com/khalidhasan-m/assignment8
+cd assignment8
+npm install
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+src/
+├── app/
+│   ├── (auth)/          # Login, Register, Profile, Update Profile
+│   ├── (main)/          # Home page, Products, Product Details
+│   └── api/auth/        # BetterAuth API route
+├── components/          # Navbar, Footer, HeroSlider, PopularProducts, etc.
+├── data/                # products.json, brands.json, slides.json, tips.json
+└── lib/                 # BetterAuth config (auth.js, auth-client.js)
