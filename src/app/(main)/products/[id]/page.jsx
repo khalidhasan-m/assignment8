@@ -1,48 +1,42 @@
 "use client";
 
-import { useEffect } from "react";
-import { useParams, useRouter } from "next/navigation";
-import Link from "next/link";
 import Image from "next/image";
-import { authClient } from "@/lib/auth-client";
+import Link from "next/link";
+import { useState, useEffect } from "react";
 import products from "@/data/products.json";
 
-// ─── Star Rating ─────────────────────────────────────────────
 function StarRating({ rating }) {
   return (
     <div className="flex items-center gap-2">
       {[1, 2, 3, 4, 5].map((star) => (
         <span
           key={star}
-          className={`text-2xl ${
+          className={`text-lg ${
             star <= Math.round(rating) ? "text-yellow-400" : "text-gray-300"
           }`}
         >
           ★
         </span>
       ))}
-      <span className="text-gray-500 text-sm">({rating} / 5)</span>
+      <span className="text-sm text-gray-500">({rating})</span>
     </div>
   );
 }
 
-// ─── Product Details Page ─────────────────────────────────────
 export default function ProductDetailsPage() {
-  const { id } = useParams();
-  const router = useRouter();
-  const { data: session, isPending } = authClient.useSession();
+  const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  const product = products.find((p) => p.id === parseInt(id));
-
-  // ── Protect Route ──
   useEffect(() => {
-    if (!isPending && !session) {
-      router.push(`/login?redirect=/products/${id}`);
-    }
-  }, [session, isPending, id, router]);
+    const url = new URL(window.location.href);
+    const productId = parseInt(url.pathname.split("/").pop());
 
-  // ── Loading ──
-  if (isPending) {
+    const foundProduct = products.find((p) => p.id === productId);
+    setProduct(foundProduct);
+    setLoading(false);
+  }, []);
+
+  if (loading) {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
         <div className="text-center">
@@ -53,128 +47,118 @@ export default function ProductDetailsPage() {
     );
   }
 
-  // ── Not Logged In ──
-  if (!session) return null;
-
-  // ── Product Not Found ──
   if (!product) {
     return (
-      <div className="flex items-center justify-center min-h-[60vh]">
-        <div className="text-center">
-          <p className="text-6xl mb-4">🔎</p>
-          <h2 className="text-2xl font-bold text-gray-700 mb-2">
+      <main className="max-w-6xl mx-auto px-4 py-12">
+        <div className="text-center py-12">
+          <h1 className="text-2xl font-bold text-gray-800 mb-4">
             Product Not Found
-          </h2>
-          <p className="text-gray-400 mb-6">
+          </h1>
+          <p className="text-gray-500 mb-8">
             The product you&apos;re looking for doesn&apos;t exist.
           </p>
           <Link href="/products">
-            <button className="bg-orange-400 text-white font-bold px-6 py-3 rounded-full hover:bg-orange-500 transition-all">
+            <button className="bg-orange-500 text-white font-bold px-6 py-3 rounded-full hover:bg-orange-600 transition-all">
               Back to Products
             </button>
           </Link>
         </div>
-      </div>
+      </main>
     );
   }
 
   return (
     <main className="max-w-6xl mx-auto px-4 py-12">
-
       {/* Back Button */}
       <Link
         href="/products"
-        className="inline-flex items-center gap-2 text-orange-500 font-semibold hover:underline mb-8 text-sm"
+        className="inline-block mb-8 text-orange-500 hover:text-orange-600 font-semibold transition"
       >
         ← Back to Products
       </Link>
 
       {/* Product Card */}
       <div className="bg-white rounded-3xl shadow-lg overflow-hidden grid grid-cols-1 md:grid-cols-2 gap-0">
-
         {/* Image */}
-        <div className="h-72 md:h-full min-h-80 overflow-hidden">
+        <div className="h-72 md:h-full min-h-80 overflow-hidden bg-gray-200">
           <Image
             src={product.image}
             alt={product.name}
             width={500}
             height={500}
+            loading="eager"
             className="w-full h-full object-cover"
           />
         </div>
 
         {/* Details */}
         <div className="p-8 flex flex-col gap-5">
-
           {/* Category + Brand */}
           <div className="flex items-center gap-3">
             <span className="bg-orange-100 text-orange-500 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">
               {product.category}
             </span>
-            <span className="text-gray-400 text-sm">by {product.brand}</span>
-          </div>
-
-          {/* Name */}
-          <h1 className="text-3xl font-extrabold text-gray-800 leading-tight">
-            {product.name}
-          </h1>
-
-          {/* Rating */}
-          <StarRating rating={product.rating} />
-
-          {/* Price */}
-          <div className="flex items-center gap-3">
-            <span className="text-4xl font-extrabold text-orange-500">
-              ${product.price}
+            <span className="text-xs font-medium text-gray-500 uppercase">
+              Brand: {product.brand}
             </span>
           </div>
 
-          {/* Description */}
+          {/* Title + Description */}
           <div>
-            <h3 className="text-sm font-bold text-gray-700 uppercase tracking-wide mb-2">
-              Description
-            </h3>
-            <p className="text-gray-500 leading-relaxed text-sm">
+            <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-800 leading-snug mb-3">
+              {product.name}
+            </h1>
+            <p className="text-gray-600 text-base leading-relaxed">
               {product.description}
             </p>
           </div>
 
-          {/* Stock */}
+          {/* Rating */}
+          <div>
+            <p className="text-sm text-gray-500 font-semibold mb-2">Ratings</p>
+            <StarRating rating={product.rating} />
+          </div>
+
+          {/* Price */}
+          <div className="border-t border-b py-4">
+            <p className="text-gray-600 text-sm mb-1">Price</p>
+            <span className="text-3xl font-extrabold text-orange-500">
+              ${product.price}
+            </span>
+          </div>
+
+          {/* Stock Status */}
           <div className="flex items-center gap-2">
             <span
               className={`w-2.5 h-2.5 rounded-full ${
-                product.stock > 0 ? "bg-green-400" : "bg-red-400"
+                product.stock > 0 ? "bg-green-400" : "bg-red-500"
               }`}
             />
             <span
               className={`text-sm font-semibold ${
-                product.stock > 0 ? "text-green-500" : "text-red-400"
+                product.stock > 0 ? "text-green-500" : "text-red-500"
               }`}
             >
               {product.stock > 0
-                ? `In Stock — ${product.stock} units left`
+                ? `In Stock (${product.stock} left)`
                 : "Out of Stock"}
             </span>
           </div>
 
-          {/* Divider */}
-          <div className="h-px bg-gray-100" />
-
-          {/* Buttons */}
+          {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-3">
             <button
               disabled={product.stock === 0}
-              className="flex-1 bg-linear-to-r from-orange-400 to-yellow-400 text-white font-bold py-3 rounded-xl hover:from-orange-500 hover:to-yellow-500 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+              className="flex-1 bg-linear-to-r from-orange-500 to-yellow-500 text-white font-bold py-3 rounded-xl hover:from-orange-600 hover:to-yellow-600 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
             >
               🛒 Add to Cart
             </button>
             <Link href="/products" className="flex-1">
-              <button className="w-full border-2 border-orange-400 text-orange-500 font-bold py-3 rounded-xl hover:bg-orange-50 transition-all">
+              <button className="w-full border-2 border-orange-500 text-orange-500 font-bold py-3 rounded-xl hover:bg-orange-50 transition-all cursor-pointer">
                 Continue Shopping
               </button>
             </Link>
           </div>
-
         </div>
       </div>
     </main>

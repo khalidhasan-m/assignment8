@@ -89,8 +89,8 @@ export default function ProductsPage() {
             onClick={() => setActiveCategory(cat)}
             className={`px-5 py-2 rounded-full text-sm font-semibold border transition-all duration-200 ${
               activeCategory === cat
-                ? "bg-orange-400 text-white border-orange-400 shadow-md"
-                : "bg-white text-gray-600 border-gray-300 hover:border-orange-400 hover:text-orange-400"
+                ? "bg-orange-500 text-white border-orange-500 shadow-md"
+                : "bg-white text-gray-600 border-gray-300 hover:border-orange-500 hover:text-orange-500"
             }`}
           >
             {cat}
@@ -100,9 +100,9 @@ export default function ProductsPage() {
 
       {/* ── Results Count ── */}
       <p className="text-sm text-gray-400 mb-6 text-center">
-        Showing <span className="font-semibold text-orange-400">{filtered.length}</span> products
+        Showing <span className="font-semibold text-orange-500">{filtered.length}</span> products
         {activeCategory !== "All" && (
-          <span> in <span className="font-semibold text-orange-400">{activeCategory}</span></span>
+          <span> in <span className="font-semibold text-orange-500">{activeCategory}</span></span>
         )}
       </p>
 
@@ -126,7 +126,7 @@ export default function ProductsPage() {
 
               {/* Content */}
               <div className="p-4 flex flex-col gap-2 flex-1">
-                <span className="text-xs font-semibold text-orange-400 uppercase tracking-wide">
+                <span className="text-xs font-semibold text-orange-500 uppercase tracking-wide">
                   {product.category}
                 </span>
                 <h3 className="text-base font-bold text-gray-800 leading-snug">
@@ -146,7 +146,7 @@ export default function ProductsPage() {
                     ${product.price}
                   </span>
                   <Link href={`/products/${product.id}`}>
-                    <button className="bg-orange-400 hover:bg-orange-500 text-white font-semibold px-4 py-2 rounded-lg transition-all text-sm">
+                    <button className="bg-orange-500 hover:bg-orange-600 text-white font-semibold px-4 py-2 rounded-lg transition-all text-sm">
                       View Details
                     </button>
                   </Link>
@@ -167,7 +167,7 @@ export default function ProductsPage() {
           </p>
           <button
             onClick={() => { setSearch(""); setActiveCategory("All"); }}
-            className="bg-orange-400 text-white font-semibold px-6 py-2.5 rounded-full hover:bg-orange-500 transition-all"
+            className="bg-orange-500 text-white font-semibold px-6 py-2.5 rounded-full hover:bg-orange-600 transition-all"
           >
             Clear Filters
           </button>
