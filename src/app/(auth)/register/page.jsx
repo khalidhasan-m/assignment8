@@ -1,18 +1,19 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
 import { FcGoogle } from "react-icons/fc";
 
-export default function LoginPage() {
+export default function RegisterPage() {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const redirect = searchParams.get("redirect") || "/";
-
-  const [formData, setFormData] = useState({ email: "", password: "" });
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    photoUrl: "",
+    password: "",
+  });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -21,32 +22,34 @@ export default function LoginPage() {
     setError("");
   };
 
-  // ── Email/Password Login ──
-  const handleLogin = async (e) => {
+  // ── Email/Password Register ──
+  const handleRegister = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError("");
 
-    const { data, error } = await authClient.signIn.email({
+    const { data, error } = await authClient.signUp.email({
+      name: formData.name,
       email: formData.email,
       password: formData.password,
+      image: formData.photoUrl,
     });
 
     setLoading(false);
 
     if (error) {
-      setError(error.message || "Invalid email or password. Please try again.");
+      setError(error.message || "Something went wrong. Please try again.");
       return;
     }
 
-    router.push(redirect); // ← redirects back to product page
+    router.push("/login");
   };
 
-  // ── Google Login ──
-  const handleGoogleLogin = async () => {
+  // ── Google Signup ──
+  const handleGoogleSignup = async () => {
     await authClient.signIn.social({
       provider: "google",
-      callbackURL: redirect, // ← also works for Google
+      callbackURL: "/",
     });
   };
 
@@ -56,12 +59,12 @@ export default function LoginPage() {
 
         {/* Title */}
         <div className="text-center mb-8">
-          <span className="text-4xl">☀️</span>
+          <span className="text-4xl">🌴</span>
           <h1 className="text-3xl font-extrabold text-gray-800 mt-2">
-            Welcome Back!
+            Create Account
           </h1>
           <p className="text-gray-500 mt-1 text-sm">
-            Login to your SunCart account
+            Join SunCart and enjoy summer deals!
           </p>
         </div>
 
@@ -73,7 +76,24 @@ export default function LoginPage() {
         )}
 
         {/* Form */}
-        <form onSubmit={handleLogin} className="flex flex-col gap-4">
+        <form onSubmit={handleRegister} className="flex flex-col gap-4">
+
+          {/* Name */}
+          <div className="flex flex-col gap-1">
+            <label className="text-sm font-semibold text-gray-700">
+              Full Name
+            </label>
+            <input
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              placeholder="John Doe"
+              required
+              className="border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-100 transition-all"
+            />
+          </div>
+
           {/* Email */}
           <div className="flex flex-col gap-1">
             <label className="text-sm font-semibold text-gray-700">
@@ -90,6 +110,22 @@ export default function LoginPage() {
             />
           </div>
 
+          {/* Photo URL */}
+          <div className="flex flex-col gap-1">
+            <label className="text-sm font-semibold text-gray-700">
+              Photo URL{" "}
+              <span className="text-gray-400 font-normal">(optional)</span>
+            </label>
+            <input
+              type="url"
+              name="photoUrl"
+              value={formData.photoUrl}
+              onChange={handleChange}
+              placeholder="https://example.com/photo.jpg"
+              className="border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-100 transition-all"
+            />
+          </div>
+
           {/* Password */}
           <div className="flex flex-col gap-1">
             <label className="text-sm font-semibold text-gray-700">
@@ -102,17 +138,21 @@ export default function LoginPage() {
               onChange={handleChange}
               placeholder="••••••••"
               required
+              minLength={8}
               className="border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-100 transition-all"
             />
+            <p className="text-xs text-gray-400 mt-0.5">
+              Minimum 8 characters
+            </p>
           </div>
 
-          {/* Login Button */}
+          {/* Register Button */}
           <button
             type="submit"
             disabled={loading}
             className="w-full bg-linear-to-r from-orange-400 to-yellow-400 text-white font-bold py-3 rounded-lg hover:from-orange-500 hover:to-yellow-500 transition-all mt-2 disabled:opacity-60 disabled:cursor-not-allowed"
           >
-            {loading ? "Logging in..." : "Login"}
+            {loading ? "Creating account..." : "Register"}
           </button>
         </form>
 
@@ -123,23 +163,23 @@ export default function LoginPage() {
           <div className="flex-1 h-px bg-gray-200" />
         </div>
 
-        {/* Google Login */}
+        {/* Google Signup */}
         <button
-          onClick={handleGoogleLogin}
+          onClick={handleGoogleSignup}
           className="w-full flex items-center justify-center gap-3 border border-gray-300 rounded-lg py-3 hover:bg-gray-50 transition-all font-semibold text-gray-700 text-sm"
         >
           <FcGoogle />
           Continue with Google
         </button>
 
-        {/* Register Link */}
+        {/* Login Link */}
         <p className="text-center text-sm text-gray-500 mt-6">
-          Don&apos;t have an account?{" "}
+          Already have an account?{" "}
           <Link
-            href="/register"
+            href="/login"
             className="text-orange-500 font-semibold hover:underline"
           >
-            Register here
+            Login here
           </Link>
         </p>
       </div>
