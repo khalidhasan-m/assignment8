@@ -1,5 +1,7 @@
 import { Montserrat, Poppins } from "next/font/google";
 import "./globals.css";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -20,9 +22,15 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className="h-full antialiased">
-      <body className={`${poppins.className} min-h-full flex flex-col`}>
+    <html lang="en">
+      <body className={`${poppins.className} min-h-screen flex flex-col`}>
         {children}
+
+        <ToastContainer
+          position="top-right"
+          autoClose={3000}
+          theme="light"
+        />
       </body>
     </html>
   );
