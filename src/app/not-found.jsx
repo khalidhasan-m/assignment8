@@ -35,7 +35,7 @@ export default function NotFound() {
 
       <Link
         href="/"
-        className="mt-6 px-6 py-3 bg-orange-500 text-white rounded-full hover:bg-orange-600 transition text-sm sm:text-base"
+        className="mt-6 mb-4 px-6 py-3 bg-orange-500 text-white rounded-full hover:bg-orange-600 transition text-sm sm:text-base"
       >
         Go Home
       </Link>
