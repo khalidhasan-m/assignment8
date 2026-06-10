@@ -6,10 +6,7 @@ import Image from "next/image";
 import products from "@/data/products.json";
 
 // ─── All Categories ─────────────────────────────────────────
-const allCategories = [
-  "All",
-  ...new Set(products.map((p) => p.category)),
-];
+const allCategories = ["All", ...new Set(products.map((p) => p.category))];
 
 // ─── Star Rating ─────────────────────────────────────────────
 function StarRating({ rating }) {
@@ -48,7 +45,6 @@ export default function ProductsPage() {
 
   return (
     <main className="max-w-7xl mx-auto px-4 py-12">
-
       {/* ── Header ── */}
       <div className="text-center mb-10">
         <h1 className="text-4xl font-extrabold text-orange-500">
@@ -100,9 +96,17 @@ export default function ProductsPage() {
 
       {/* ── Results Count ── */}
       <p className="text-sm text-gray-400 mb-6 text-center">
-        Showing <span className="font-semibold text-orange-500">{filtered.length}</span> products
+        Showing{" "}
+        <span className="font-semibold text-orange-500">{filtered.length}</span>{" "}
+        products
         {activeCategory !== "All" && (
-          <span> in <span className="font-semibold text-orange-500">{activeCategory}</span></span>
+          <span>
+            {" "}
+            in{" "}
+            <span className="font-semibold text-orange-500">
+              {activeCategory}
+            </span>
+          </span>
         )}
       </p>
 
@@ -137,8 +141,12 @@ export default function ProductsPage() {
                 <StarRating rating={product.rating} />
 
                 {/* Stock */}
-                <p className={`text-xs font-medium ${product.stock > 0 ? "text-green-500" : "text-red-400"}`}>
-                  {product.stock > 0 ? `✅ In Stock (${product.stock})` : "❌ Out of Stock"}
+                <p
+                  className={`text-xs font-medium ${product.stock > 0 ? "text-green-500" : "text-red-400"}`}
+                >
+                  {product.stock > 0
+                    ? `✅ In Stock (${product.stock})`
+                    : "❌ Out of Stock"}
                 </p>
 
                 {/* Price + Button */}
@@ -147,7 +155,7 @@ export default function ProductsPage() {
                     ${product.price}
                   </span>
                   <Link href={`/products/${product.id}`}>
-                    <button className="bg-orange-500 hover:bg-orange-600 text-white font-semibold px-4 py-2 rounded-lg transition-all text-sm">
+                    <button className="bg-orange-500 hover:bg-orange-600 text-white font-semibold px-4 py-2 rounded-lg transition-all text-sm cursor-pointer">
                       View Details
                     </button>
                   </Link>
@@ -167,7 +175,10 @@ export default function ProductsPage() {
             Try a different search or category
           </p>
           <button
-            onClick={() => { setSearch(""); setActiveCategory("All"); }}
+            onClick={() => {
+              setSearch("");
+              setActiveCategory("All");
+            }}
             className="bg-orange-500 text-white font-semibold px-6 py-2.5 rounded-full hover:bg-orange-600 transition-all"
           >
             Clear Filters
