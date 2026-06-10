@@ -59,8 +59,8 @@ export default function PopularProducts() {
                 </span>
 
                 <Link href={`/products/${product.id}`}>
-                  <button className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg text-sm">
-                    View
+                  <button className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg text-sm cursor-pointer transition-colors duration-200">
+                    View Details
                   </button>
                 </Link>
               </div>

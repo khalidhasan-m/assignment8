@@ -4,20 +4,20 @@
     "title": "Summer Sale 50% OFF!",
     "subtitle": "Shop the hottest summer deals before they're gone!",
     "bg": "from-orange-400 to-yellow-300",
-    "image": "https://images.unsplash.com/photo-1521334884684-d80222895322?auto=format&fit=crop&w=1400&q=80"
+    "image": "https://images.unsplash.com/photo-1561712815-189b9d6fafdf?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
   },
   {
     "id": 2,
     "title": "Hot Deals This Week",
     "subtitle": "Beach accessories, skincare & outfits at unbeatable prices.",
     "bg": "from-yellow-400 to-orange-300",
-    "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1400&q=80"
+    "image": "https://images.unsplash.com/photo-1607083207685-aaf05f2c908c?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
   },
   {
     "id": 3,
     "title": "Stay Cool This Summer",
     "subtitle": "Explore our new summer collection — fresh styles just dropped!",
     "bg": "from-amber-400 to-yellow-200",
-    "image": "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=1400&q=80"
+    "image": "https://images.unsplash.com/photo-1496318447583-f524534e9ce1?q=80&w=1234&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
   }
 ]
