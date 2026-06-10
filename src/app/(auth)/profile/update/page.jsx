@@ -163,7 +163,7 @@ export default function UpdateProfilePage() {
           <button
             type="submit"
             disabled={loading || success}
-            className="w-full bg-linear-to-r from-orange-400 to-yellow-400 text-white font-bold py-3 rounded-xl hover:from-orange-500 hover:to-yellow-500 transition-all disabled:opacity-60 disabled:cursor-not-allowed mt-2"
+            className="w-full bg-linear-to-r from-orange-400 to-yellow-400 text-white font-bold py-3 rounded-xl hover:from-orange-500 hover:to-yellow-500 transition-all disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer mt-2"
           >
             {loading ? "Updating..." : "Update Information"}
           </button>

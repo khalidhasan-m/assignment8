@@ -127,7 +127,7 @@ export default function MyProfilePage() {
 
           {/* Update Button */}
           <Link href="/profile/update" className="w-full">
-            <button className="w-full bg-linear-to-r from-orange-400 to-yellow-400 text-white font-bold py-3 rounded-xl hover:from-orange-500 hover:to-yellow-500 transition-all">
+            <button className="w-full bg-linear-to-r from-orange-400 to-yellow-400 text-white font-bold py-3 rounded-xl hover:from-orange-500 hover:to-yellow-500 transition-all cursor-pointer">
               📝 Update Information
             </button>
           </Link>

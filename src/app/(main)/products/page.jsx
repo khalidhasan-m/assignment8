@@ -86,7 +86,7 @@ export default function ProductsPage() {
             className={`px-5 py-2 rounded-full text-sm font-semibold border transition-all duration-200 ${
               activeCategory === cat
                 ? "bg-orange-500 text-white border-orange-500 shadow-md"
-                : "bg-white text-gray-600 border-gray-300 hover:border-orange-500 hover:text-orange-500"
+                : "bg-white text-gray-600 border-gray-300 hover:border-orange-500 hover:text-orange-500 cursor-pointer"
             }`}
           >
             {cat}
