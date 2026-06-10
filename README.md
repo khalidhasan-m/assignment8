@@ -4,7 +4,7 @@ A modern summer eCommerce platform where users can explore and purchase seasonal
 
 ## 🌐 Live URL
 
-[https://my-live-url.vercel.app](https://my-live-url.vercel.app)
+[https://assignment8-kappa.vercel.app](https://assignment8-kappa.vercel.app)
 
 
 ## ✨ Key Features
