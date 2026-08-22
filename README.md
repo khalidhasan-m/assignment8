@@ -2,9 +2,15 @@
 
 SunCart is a responsive summer-essentials storefront built with Next.js App Router. Visitors can browse the catalog, search by product or brand, filter by category, and view product details. Account holders can sign in with email/password or Google OAuth when Google credentials are configured, view their profile, and update their display name and photo URL.
 
+[![CI](https://github.com/khalidhasan-m/suncart/actions/workflows/ci.yml/badge.svg)](https://github.com/khalidhasan-m/suncart/actions/workflows/ci.yml)
+
+## Live demo
+
+Visit the deployed storefront at [assignment8-kappa.vercel.app](https://assignment8-kappa.vercel.app). The live deployment uses the same public catalog and interface documented in this repository. Authentication features require the deployment environment to contain the production variables listed below.
+
 ## Features
 
-SunCart includes a responsive storefront, an auto-playing hero carousel, product search and category filters, protected product-detail and account routes, Better Auth session management backed by MongoDB, optional Google OAuth, resilient account avatars, legal pages, accessible navigation controls, production error recovery, and security headers.
+SunCart includes a responsive storefront, an auto-playing hero carousel, product search and category filters, protected product-detail and account routes, Better Auth session management backed by MongoDB, optional Google OAuth, resilient account avatars, legal pages, accessible navigation controls, production error recovery, security headers, crawl metadata, and automated CI verification.
 
 The cart control is intentionally disabled because this assignment does not implement order creation, payment processing, inventory mutation, or checkout. It is not presented as a functional payment flow.
 
@@ -73,7 +79,7 @@ The command runs ESLint and a production Next.js build. To run the already-built
 npm start
 ```
 
-The auth API is initialized lazily on request, so a build can run in CI without production secrets. Runtime authentication requests still fail fast with a clear configuration error when required variables are missing.
+The auth API is initialized lazily on request, so a build can run in CI without production secrets. Runtime authentication requests fail fast with a clear configuration error when required variables are missing. The public catalog remains available independently of account configuration.
 
 ## Production notes
 
