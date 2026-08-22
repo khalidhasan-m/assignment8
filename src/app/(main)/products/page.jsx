@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import products from "@/data/products.json";
+import AddToCartButton from "@/components/AddToCartButton";
 
 const allCategories = ["All", ...new Set(products.map((product) => product.category))];
 
@@ -111,15 +112,16 @@ export default function ProductsPage() {
                   {product.stock > 0 ? `In Stock (${product.stock})` : "Out of Stock"}
                 </p>
 
-                <div className="flex items-center justify-between mt-auto pt-2">
+                <div className="mt-auto pt-2 flex items-center justify-between gap-2">
                   <span className="text-xl font-extrabold text-orange-500">${product.price}</span>
                   <Link
                     href={`/products/${product.id}`}
-                    className="bg-orange-500 hover:bg-orange-600 text-white font-semibold px-4 py-2 rounded-lg transition-all text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2"
+                    className="bg-white border border-orange-500 text-orange-600 hover:bg-orange-50 font-semibold px-3 py-2 rounded-lg transition-all text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2"
                   >
-                    View Details
+                    Details
                   </Link>
                 </div>
+                <AddToCartButton productId={product.id} stock={product.stock} compact />
               </div>
             </article>
           ))}

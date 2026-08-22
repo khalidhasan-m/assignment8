@@ -1,5 +1,6 @@
 import { Montserrat, Poppins } from "next/font/google";
 import { ToastContainer } from "react-toastify";
+import { CartProvider } from "@/components/CartProvider";
 import "./globals.css";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -36,7 +37,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${poppins.className} min-h-screen flex flex-col`}>
-        {children}
+        <CartProvider>{children}</CartProvider>
         <ToastContainer position="top-right" autoClose={3000} theme="light" />
       </body>
     </html>

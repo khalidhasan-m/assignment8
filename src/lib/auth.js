@@ -4,6 +4,7 @@ import { mongodbAdapter } from "better-auth/adapters/mongodb";
 
 let authInstance;
 let mongoClient;
+let database;
 
 function requiredEnvironmentVariable(name) {
   const value = process.env[name]?.trim();
@@ -39,7 +40,7 @@ export function getAuth() {
     serverSelectionTimeoutMS: 5000,
   });
 
-  const database = mongoClient.db(process.env.MONGO_DB_NAME?.trim() || "sun-cart");
+  database = mongoClient.db(process.env.MONGO_DB_NAME?.trim() || "sun-cart");
   const googleClientId = process.env.GOOGLE_CLIENT_ID?.trim();
   const googleClientSecret = process.env.GOOGLE_CLIENT_SECRET?.trim();
   const socialProviders = {};
@@ -74,4 +75,9 @@ export function getAuth() {
   });
 
   return authInstance;
+}
+
+export function getDatabase() {
+  getAuth();
+  return database;
 }

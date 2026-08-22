@@ -6,12 +6,14 @@ import { usePathname, useRouter } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
 import UserAvatar from "@/components/UserAvatar";
 import { toast } from "react-toastify";
-import { RiLogoutBoxLine, RiMenuLine, RiCloseLine } from "react-icons/ri";
+import { RiLogoutBoxLine, RiMenuLine, RiCloseLine, RiShoppingCartLine } from "react-icons/ri";
+import { useCart } from "@/components/CartProvider";
 
 const navLinks = [
   { label: "Home", href: "/" },
   { label: "Products", href: "/products" },
   { label: "My Profile", href: "/profile", requiresAuth: true },
+  { label: "My Orders", href: "/orders", requiresAuth: true },
 ];
 
 export default function Navbar() {
@@ -20,6 +22,7 @@ export default function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
   const { data: session, isPending } = authClient.useSession();
+  const { itemCount } = useCart();
 
   const visibleNavLinks = navLinks.filter((link) => !link.requiresAuth || session);
   const isActive = (href) => (href === "/" ? pathname === "/" : pathname.startsWith(href));
@@ -62,6 +65,20 @@ export default function Navbar() {
         </Link>
       ))}
     </>
+  );
+
+  const renderCartLink = (mobile = false) => (
+    <Link
+      href="/cart"
+      onClick={mobile ? () => setIsMenuOpen(false) : undefined}
+      aria-label={`Cart with ${itemCount} item${itemCount === 1 ? "" : "s"}`}
+      className={mobile
+        ? "flex items-center justify-between rounded-lg px-3 py-2 text-sm text-gray-700 hover:bg-orange-50"
+        : "relative flex items-center gap-2 rounded-full border border-orange-200 px-3 py-2 text-sm font-semibold text-orange-600 transition hover:bg-orange-50"}
+    >
+      <span className="flex items-center gap-2"><RiShoppingCartLine aria-hidden="true" />Cart</span>
+      <span className="min-w-5 rounded-full bg-orange-500 px-1.5 py-0.5 text-center text-xs font-bold text-white" aria-live="polite">{itemCount}</span>
+    </Link>
   );
 
   const renderAuthControls = (mobile = false) => {
@@ -116,7 +133,7 @@ export default function Navbar() {
         </Link>
 
         <div className="hidden md:flex items-center gap-6">{renderNavLinks()}</div>
-        <div className="hidden md:flex items-center gap-3">{renderAuthControls()}</div>
+        <div className="hidden md:flex items-center gap-3">{renderCartLink()}{renderAuthControls()}</div>
 
         <button
           type="button"
@@ -132,7 +149,7 @@ export default function Navbar() {
 
       <div id="mobile-navigation" className={`md:hidden overflow-hidden transition-all duration-300 ${isMenuOpen ? "max-h-125" : "max-h-0"}`}>
         <div className="mx-4 my-3 rounded-2xl border border-orange-100 bg-white shadow-sm p-4 space-y-3">
-          <div className="flex flex-col gap-2">{renderNavLinks(true)}</div>
+          <div className="flex flex-col gap-2">{renderNavLinks(true)}{renderCartLink(true)}</div>
           <div className="border-t pt-3 flex flex-col gap-3">{renderAuthControls(true)}</div>
         </div>
       </div>

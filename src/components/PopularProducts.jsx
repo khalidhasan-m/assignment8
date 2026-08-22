@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import products from "@/data/products.json";
+import AddToCartButton from "@/components/AddToCartButton";
 
 function StarRating({ rating }) {
   return (
@@ -40,15 +41,16 @@ export default function PopularProducts() {
               <h3 className="font-bold text-gray-800">{product.name}</h3>
               <StarRating rating={product.rating} />
 
-              <div className="flex justify-between items-center mt-3">
+              <div className="flex justify-between items-center mt-3 gap-2">
                 <span className="text-orange-500 font-bold text-xl">${product.price}</span>
                 <Link
                   href={`/products/${product.id}`}
-                  className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg text-sm transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2"
+                  className="bg-white border border-orange-500 text-orange-600 hover:bg-orange-50 px-3 py-2 rounded-lg text-sm transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2"
                 >
-                  View Details
+                  Details
                 </Link>
               </div>
+              <AddToCartButton productId={product.id} stock={product.stock} compact />
             </div>
           </article>
         ))}

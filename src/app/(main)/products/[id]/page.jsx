@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import products from "@/data/products.json";
 import { authClient } from "@/lib/auth-client";
+import AddToCartButton from "@/components/AddToCartButton";
 
 function StarRating({ rating }) {
   return (
@@ -105,13 +106,12 @@ export default function ProductDetailsPage() {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-3">
-            <button type="button" disabled className="flex-1 bg-linear-to-r from-orange-500 to-yellow-500 text-white font-bold py-3 rounded-xl opacity-60 cursor-not-allowed" title="Cart checkout is not enabled yet">
-              Add to Cart
-            </button>
-            <Link href="/products" className="flex-1 inline-flex items-center justify-center border-2 border-orange-500 text-orange-500 font-bold py-3 rounded-xl hover:bg-orange-50 transition-all">
-              Continue Shopping
+            <AddToCartButton productId={product.id} stock={product.stock} />
+            <Link href="/cart" className="flex-1 inline-flex items-center justify-center border-2 border-orange-500 text-orange-500 font-bold py-3 rounded-xl hover:bg-orange-50 transition-all">
+              View Cart
             </Link>
           </div>
+          <Link href="/products" className="text-center text-sm text-gray-400 hover:text-orange-500">Continue Shopping</Link>
         </div>
       </article>
     </main>

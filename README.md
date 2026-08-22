@@ -10,9 +10,9 @@ Visit the deployed storefront at [assignment8-kappa.vercel.app](https://assignme
 
 ## Features
 
-SunCart includes a responsive storefront, an auto-playing hero carousel, product search and category filters, protected product-detail and account routes, Better Auth session management backed by MongoDB, optional Google OAuth, resilient account avatars, legal pages, accessible navigation controls, production error recovery, security headers, crawl metadata, and automated CI verification.
+SunCart includes a responsive storefront, an auto-playing hero carousel, product search and category filters, a persistent stock-aware shopping cart, authenticated checkout, standard/express/pickup delivery choices, cash-on-delivery order placement, server-side order validation, inventory reservation, order history, protected account routes, Better Auth session management backed by MongoDB, optional Google OAuth, resilient account avatars, legal pages, accessible navigation controls, production error recovery, security headers, crawl metadata, and automated CI verification.
 
-The cart control is intentionally disabled because this assignment does not implement order creation, payment processing, inventory mutation, or checkout. It is not presented as a functional payment flow.
+The current checkout supports **cash on delivery**. Card payments, online payment gateways, coupons, returns, and refunds are intentionally outside this implementation’s scope.
 
 ## Stack
 
@@ -91,10 +91,14 @@ Use a strong randomly generated `BETTER_AUTH_SECRET`, set `BETTER_AUTH_URL` to t
 | --- | --- | --- |
 | `/` | Public | Storefront home page |
 | `/products` | Public | Searchable product catalog |
-| `/products/[id]` | Authenticated | Product details |
+| `/products/[id]` | Authenticated | Product details and add-to-cart |
+| `/cart` | Public | Persistent shopping cart with stock-aware quantity controls |
+| `/checkout` | Authenticated | Delivery selection, address capture, and cash-on-delivery checkout |
+| `/orders` | Authenticated | Order history and delivery status |
 | `/login` | Public | Email/password and optional Google sign-in |
 | `/register` | Public | Account registration |
 | `/profile` | Authenticated | Account details |
 | `/profile/update` | Authenticated | Update account name and photo URL |
+| `/api/orders` | Authenticated | Server-validated order creation and order history API |
 | `/privacy-policy` | Public | Privacy policy |
 | `/terms-of-service` | Public | Terms of service |
